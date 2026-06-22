@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百家乐简明指南与访问提醒 · 信息卡片</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #feede0 0%, #f9d9c2 55%, #f5c7a8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1.2rem;
+            line-height: 1.6;
+            color: #2e241c;
+        }
+
+        .page-card {
+            max-width: 1140px;
+            width: 100%;
+            background: #fffcf7;
+            border-radius: 48px 48px 36px 36px;
+            box-shadow: 0 24px 48px -12px rgba(180, 110, 60, 0.32),
+                        0 8px 20px rgba(0,0,0,0.04);
+            padding: 2.4rem 2.6rem 3.2rem;
+            transition: all 0.2s ease;
+        }
+
+        /* hero 区 — 主视觉 */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem 1.8rem;
+            margin-bottom: 2.6rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px dashed #eddccf;
+        }
+
+        .hero-text {
+            flex: 2 1 300px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #4d2e1d;
+            background: linear-gradient(135deg, #8b5a3a, #b07d58);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-text .subhead {
+            font-size: 1.1rem;
+            color: #7a5b44;
+            background: rgba(245, 199, 168, 0.25);
+            display: inline-block;
+            padding: 0.2rem 1.2rem 0.2rem 0;
+            border-radius: 40px;
+            font-weight: 400;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-text p {
+            font-size: 1rem;
+            color: #423226;
+            max-width: 560px;
+        }
+
+        .hero-visual {
+            flex: 0 0 auto;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle at 30% 30%, #fadac6, #ecc4ab);
+            border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: 300;
+            color: #5f3d28;
+            box-shadow: inset 0 -8px 12px rgba(140, 80, 40, 0.08), 0 12px 20px -8px #cd9f85;
+            transform: rotate(-2deg);
+        }
+
+        .hero-visual span {
+            background: #fffcf7;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        /* 通用卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2.2rem;
+        }
+
+        .card {
+            background: #fffaf3;
+            border-radius: 32px;
+            padding: 1.6rem 1.8rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(174, 122, 82, 0.08), 0 1px 3px rgba(0,0,0,0.02);
+            transition: transform 0.1s ease, box-shadow 0.2s;
+            border: 1px solid #f2e3d6;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 28px -12px rgba(140, 85, 45, 0.18);
+            border-color: #e5cfbd;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #5b3925;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3::before {
+            content: "▹";
+            color: #b88764;
+            font-size: 1.2rem;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #3c2c22;
+            margin-bottom: 0.35rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0.2rem;
+        }
+        .card li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .card li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #b17a58;
+        }
+
+        /* 适合人群卡片特殊色 */
+        .card.audience {
+            background: #fff6ed;
+        }
+
+        /* 自然链接段落区 */
+        .link-note {
+            background: #fcf2e9;
+            border-radius: 40px;
+            padding: 1.6rem 2.2rem;
+            margin: 2rem 0 1.6rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.4rem 1rem;
+            border-left: 6px solid #dbb59a;
+        }
+
+        .link-note p {
+            font-size: 1.02rem;
+            color: #2f221b;
+            flex: 1 1 240px;
+        }
+
+        .link-note a {
+            color: #9f6a44;
+            font-weight: 600;
+            text-decoration: none;
+            background: #ffffffd8;
+            padding: 0.2rem 1rem 0.25rem;
+            border-radius: 60px;
+            border: 1px solid #dbb59a;
+            transition: all 0.15s;
+            font-size: 1.05rem;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
+        .link-note a:hover {
+            background: #a5714b;
+            color: #fffaf5;
+            border-color: #a5714b;
+        }
+
+        /* 提示 / FAQ 摘要 */
+        .tip-faq {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.6rem;
+            margin: 1.8rem 0 1rem;
+            padding-top: 1.2rem;
+            border-top: 2px dotted #e2cfbd;
+        }
+
+        .tip-block {
+            flex: 1 1 200px;
+            background: #fcf4ec;
+            border-radius: 28px;
+            padding: 1.2rem 1.6rem;
+        }
+
+        .tip-block h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #6e4c35;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-block p, .tip-block li {
+            font-size: 0.92rem;
+            color: #3f2f25;
+        }
+
+        .tip-block ul {
+            list-style: none;
+            padding-left: 0.2rem;
+        }
+        .tip-block li {
+            padding-left: 1rem;
+            position: relative;
+        }
+        .tip-block li::before {
+            content: "–";
+            position: absolute;
+            left: -0.1rem;
+            color: #b78461;
+        }
+
+        /* 底部脚标 */
+        .footer-note {
+            margin-top: 2.4rem;
+            font-size: 0.85rem;
+            color: #7b624d;
+            text-align: center;
+            border-top: 1px solid #ecdccc;
+            padding-top: 1.6rem;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 680px) {
+            .page-card {
+                padding: 1.6rem 1.2rem 2.2rem;
+                border-radius: 32px;
+            }
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            .hero-visual {
+                width: 90px;
+                height: 90px;
+                font-size: 2rem;
+            }
+            .hero-visual span {
+                font-size: 1rem;
+                padding: 0.2rem 0.8rem;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .link-note {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.2rem 1.4rem;
+            }
+            .link-note a {
+                white-space: normal;
+                word-break: break-word;
+            }
+            .tip-faq {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 440px) {
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .hero-visual {
+                align-self: flex-end;
+                margin-top: -0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-card">
+
+    <!-- 主视觉 + 简明指南 -->
+    <div class="hero">
+        <div class="hero-text">
+            <div class="subhead">简明指南 · 访问提醒</div>
+            <h1>百家乐 · 信息速览</h1>
+            <p>规则清晰，节奏明快。从基础玩法到注意事项，这篇卡片式介绍帮你快速建立认知。适合刚接触或想系统回顾的读者。</p>
+        </div>
+        <div class="hero-visual">
+            <span>🃏</span>
+        </div>
+    </div>
+
+    <!-- 用途卡片 — 百家乐主要应用场景 -->
+    <div class="card-grid">
+        <div class="card">
+            <h3>玩法全景</h3>
+            <p>闲、庄、和三种基础投注，补牌规则固定，无需复杂决策。重点在于熟悉牌路与赔率结构。</p>
+            <ul>
+                <li>标准八副牌，洗牌后发局</li>
+                <li>庄家优势约 1.06% (庄投注)</li>
+                <li>免抽水版本另有限制</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>策略参考</h3>
+            <p>不依赖算牌，更重资金管理与心态。设定停损线与目标局数，避免连续追注。</p>
+            <ul>
+                <li>平注法：每局固定注码</li>
+                <li>趋势观察但不迷信路纸</li>
+                <li>明确休闲与竞技边界</li>
+            </ul>
+        </div>
+        <div class="card audience">
+            <h3>适合人群</h3>
+            <p>喜欢低决策成本、高速对局的玩家；也适合研究概率与短期波动的爱好者。</p>
+            <ul>
+                <li>新手：规则五分钟可掌握</li>
+                <li>进阶：关注赔率、抽水与切牌</li>
+                <li>不适合期望长期必赢者</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 + 访问提醒 -->
+    <div class="link-note">
+        <p>
+            <strong>访问提醒：</strong> 若想体验完整规则说明与最新牌桌信息，可直接参考 
+            <a href="https://cns-web-baccarat.com">百家乐</a> 
+            专题页面。内容涵盖术语表、常见问题及模拟对局示意，适合查阅对照。
+        </p>
+        <p style="flex-basis: 100%; margin-top: 0.2rem; font-size: 0.95rem; color: #604a38;">
+            ⚡ 建议事前了解当地法规，保持理性参与。本篇仅作知识介绍。
+        </p>
+    </div>
+
+    <!-- 提示摘要 & FAQ 风格 -->
+    <div class="tip-faq">
+        <div class="tip-block">
+            <h4>📋 入局前确认</h4>
+            <ul>
+                <li>确认平台是否合规、出入金政策</li>
+                <li>熟悉该版本庄抽水比例 (常见5%)</li>
+                <li>单局时间约30–60秒，控制节奏</li>
+            </ul>
+        </div>
+        <div class="tip-block">
+            <h4>❓ 常见疑问摘要</h4>
+            <ul>
+                <li>「和」赔率8:1，但出现概率约9.5%</li>
+                <li>「对子」为附加彩池，非必要投注</li>
+                <li>线上与实体规则基本一致</li>
+                <li>补牌规则可用表格查询，无需记忆</li>
+            </ul>
+        </div>
+        <div class="tip-block">
+            <h4>🔐 安全边界</h4>
+            <ul>
+                <li>设置单日预算，不过度借贷</li>
+                <li>避免情绪化加注 (tilt)</li>
+                <li>定期休息，不追求连续对局</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 致密总结 -->
+    <div class="footer-note">
+        <p>信息卡片式 · 版本 2025 · 内容基于通用百家乐规则整理，不构成任何投注建议。请根据个人判断合理参考。</p>
+    </div>
+
+</div>
+</body>
+</html>
